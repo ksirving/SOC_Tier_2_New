@@ -8,9 +8,6 @@ library(tidyverse)
 library(rcompanion)
 library(tidyr)
 
-## below defines thresholds from all csci
-
-ref<-loadRefData()
 
 ## upload new formatted data
 
@@ -34,11 +31,13 @@ bio_h_summary<-  expand.grid(biol.endpoints=biol.endpoints,hydro.endpoints=hydro
 bio_h_summary
 
 ## save
-write.csv(bio_h_summary, "output_data/01_hydro_endpoints_order_Nov2020.csv")
+write.csv(bio_h_summary, "output_data/01_csci_hydro_endpoints_order_Nov2020.csv")
 
 
 ## GLMs per ffm, threshold and endpoints
 ## negative delta
+
+i=52
 
 neg.glm<-lapply(1:nrow(bio_h_summary), function(i)
   {
@@ -50,11 +49,11 @@ neg.glm<-lapply(1:nrow(bio_h_summary), function(i)
   mydat<-na.omit(new_csci[,c(hmet, bmet)])
   names(mydat)<-c( "hydro","bio")
   
-  mydat <- mydat[which(mydat$hydro<=0 ),]
+  mydat <- mydat[which(mydat$hydro<0),]
   
   mydat$Condition<-ifelse(mydat$bio< bmet.thresh,0,1)
   mydat<-mydat[order(mydat$bio),]
-  
+  dim(mydat)
   glm(Condition~hydro, family=binomial(link="logit"), data=mydat)
     
     
@@ -80,7 +79,7 @@ code <- bio_h_summary$comb_code
     mydat<-na.omit(new_csci[,c(hmet, bmet)])
     names(mydat)<-c( "hydro","bio")
     
-    mydat <- mydat[which(mydat$hydro<=0 ),]
+    mydat <- mydat[which(mydat$hydro<0 ),]
     
     mydat$Condition<-ifelse(mydat$bio< bmet.thresh,0,1)
     mydat<-mydat[order(mydat$bio),]
@@ -91,11 +90,11 @@ code <- bio_h_summary$comb_code
     mydat$threshold <- bmet.thresh
 
     data <- bind_rows(data, mydat)
-
+    # dim(data)
 }
 
 data_neg <- data
-
+head(data_neg)
 ## positive delta
 pos.glm<-lapply(1:nrow(bio_h_summary), function(i)
 {
@@ -126,7 +125,7 @@ bio_h_summary$comb_code <- paste(bio_h_summary$biol.endpoints, "_", bio_h_summar
 length(bio_h_summary)
 
 code <- bio_h_summary$comb_code
-code
+i=52
 
 for(i in 1: length(code)) {
   
@@ -148,7 +147,7 @@ for(i in 1: length(code)) {
   mydat$threshold <- bmet.thresh
 
   data <- bind_rows(data, mydat)
-  
+  dim(data)
   
 }
 
@@ -221,123 +220,102 @@ csci_coefs <- rbind(csciposcoefs, cscinegcoefs)
 ## save coefs
 write.csv(csci_coefs, "output_data/manuscript/01_csci_glm_coefs.csv")
 
-## combine ffm names and delta h
-hydro.m<-na.omit(unique(melt(new_csci[,hydro.endpoints])))
-hydro.m<-hydro.m[order(hydro.m$variable,hydro.m$value),]
-names(hydro.m)<-c("hydro.endpoints","hydro.threshold")
-head(hydro.m)
-
-## hydro threshold here - just used to see whether delta h is negative or positive
-bio_h_summary2<-merge(bio_h_summary, hydro.m)
-head(bio_h_summary2)
 
 ## extract predicted probability
-bio_h_summary2$PredictedProbability<-
-  sapply(1:nrow(bio_h_summary2), function(i)
-  {
-    hmet<-bio_h_summary2[i,"hydro.endpoints"]
-    bmet<-bio_h_summary2[i,"biol.endpoints"]
-    hthresh <- bio_h_summary2[i,"thresholds"]
-    thresh<-bio_h_summary2[i,"hydro.threshold"]
-    thresh
 
-    modnum<-  which(bio_h_summary$hydro.endpoints==hmet & bio_h_summary$biol.endpoints==bmet 
-                    & bio_h_summary$thresholds==hthresh)
-    modnum
-    if(thresh<0) {
-      mymod<-neg.glm[[modnum]]
-    } else {
-      mymod<-pos.glm[[modnum]]
-    }
-    
-    
-    mydata<-data.frame(hydro=thresh)
-    mydata
-    predict(mymod, newdata=mydata, type="response")
-    
-  })
+head(data_neg)
+
+code <- bio_h_summary$comb_code
+
+## change names in df and make code
+data_neg <- data_neg %>%
+  select(-site_num) %>%
+  rename(thresholds = threshold,  biol.endpoints = bio, hydro.endpoints = hydro_code ) %>%
+  mutate(comb_code = paste(biol.endpoints, "_", hydro.endpoints,"_", thresholds, sep=""))
+
+datx <- NULL
+for(i in 1:length(code)) {
+  
+  dat <- data_neg %>%
+    filter(comb_code == code[i]) 
+  
+  dat <- na.omit(dat)
+  head(dat)
+  
+  modnum<-  which(bio_h_summary$comb_code== code[i])
+  modnum
+  
+  
+  mymod<-neg.glm[[modnum]]
+  
+  
+  mydata<-data.frame(hydro = dat$hydro)
+  mydata
+  
+  
+  dat[,"PredictedProbability"] <-predict(mymod, newdata=mydata, type="response")
+  
+  datx <- rbind(datx, dat)
+}
+
+bio_h_summary_neg <- datx
 
 ## ad neg or pos
-bio_h_summary2$Type<-ifelse(bio_h_summary2$hydro.threshold<0,"Negative","Positive")
+bio_h_summary_neg$Type<-"Negative"
 
-## Combine all data together - input and output of model
-## subset only negative numbers
-neg_pred <- subset(bio_h_summary2, Type!="Positive")
+## add code
 
-## merge dataframes
-head(data_neg) ## response 1/0
-head(neg_pred) ## predicted probabiloty
+data_pos <- data_pos %>%
+  select(-site_num) %>%
+  rename(thresholds = threshold,  biol.endpoints = bio, hydro.endpoints = hydro_code ) %>%
+  mutate(comb_code = paste(biol.endpoints, "_", hydro.endpoints,"_", thresholds, sep=""))
 
-## create merge code
-data_neg$comb_code <- paste(data_neg$bio, "_", data_neg$hydro_code,"_", data_neg$threshold, sep="")
-dim(data_neg)
-all_data <- merge(neg_pred, data_neg, by="comb_code", all=T)
+
+## extract predicted probability
+datx <- NULL
+for(i in 1:length(code)) {
+  
+  dat <- data_pos %>%
+    filter(comb_code == code[i]) 
+  
+  dat <- na.omit(dat)
+  head(dat)
+  
+  modnum<-  which(bio_h_summary$comb_code== code[i])
+  modnum
+    
+
+    mymod<-pos.glm[[modnum]]
+    
+    
+    mydata<-data.frame(hydro = dat$hydro)
+    mydata
+    
+    
+    dat[,"PredictedProbability"] <-predict(mymod, newdata=mydata, type="response")
+    
+    datx <- rbind(datx, dat)
+  }
+  
+
+bio_h_summary_pos <- datx
+
+## ad neg or pos
+bio_h_summary_pos$Type<-"Positive"
+head(bio_h_summary_pos)
+
+all_data <- rbind(bio_h_summary_pos, bio_h_summary_neg)
+
 head(all_data)
 
-all_data$thresholds <- as.character(all_data$thresholds)
+all_data$thresholds <- as.factor(all_data$thresholds)
 
 # save - df for BRTs
-write.csv(all_data, "output_data/01_all_data_neg_logR_metrics_figures_April2021.csv")
+write.csv(all_data, "output_data/01_bugs_all_data_neg_pos_logR_metrics_figures_April2021.csv")
 
 ### CSCI endpoint only
 all_data_csci <- subset(all_data,biol.endpoints=="CSCI")
 head(all_data_csci)
-write.csv(all_data_csci, "output_data/01_csci_neg_logR_metrics_figures_April2021.csv")
+write.csv(all_data_csci, "output_data/01_csci_neg_pos_logR_metrics_figures_April2021.csv")
 
-
-ggplot(all_data, aes(x=hydro.threshold, y=PredictedProbability, color=biol.endpoints))+
-  # geom_point(size=1)+
-  geom_path()+#stat_summary(fun.y="mean", geom="line")+
-  facet_wrap(~hydro.endpoints, scales="free_x", nrow=4)+scale_y_continuous(limits=c(0,1))+
-  geom_vline(xintercept=0, linetype="dashed")+
-  geom_point(aes(y=Condition, x=hydro), colour = 'black', size = 1)
-  
-## CSCI
-ggplot(all_data_csci, aes(x=hydro.threshold, y=PredictedProbability, color=thresholds))+
-  # geom_point(size=1)+
-  geom_path()+#stat_summary(fun.y="mean", geom="line")+
-  facet_wrap(~hydro.endpoints, scales="free_x", nrow=4)+scale_y_continuous(limits=c(0,1))+
-  geom_vline(xintercept=0, linetype="dashed")+
-  geom_point(aes(y=Condition, x=hydro), colour = 'black', size = 1)
-
-
-## positive
-
-## subset only negative numbers
-pos_pred <- subset(bio_h_summary2, Type!="Negative")
-
-## merge dataframes
-head(data_pos) ## condition 1/0s
-head(pos_pred) ## negative pred probs 
-
-data_pos$comb_code <- paste(data_pos$bio, "_", data_pos$hydro_code, "_", data_pos$threshold, sep="")
-
-all_data <- merge(pos_pred, data_pos, by="comb_code", all=T)
-head(all_data)
-
-## save
-write.csv(all_data, "output_data/01_all_data_pos_logR_metrics_figures_April2021.csv")
-
-### CSCI endpoint
-all_data_csci <- subset(all_data,biol.endpoints=="CSCI")
-head(all_data_csci)
-write.csv(all_data_csci, "output_data/01_csci_pos_logR_metrics_figures_April2021.csv")
-
-
-# all_data[which(all_data$hydro==-194),]
-## all endpoints - each endpoint has different number of 1s and 0s
-ggplot(all_data, aes(x=hydro.threshold, y=PredictedProbability, color=biol.endpoints))+
-  # geom_point(size=1)+
-  geom_path()+#stat_summary(fun.y="mean", geom="line")+
-  facet_wrap(~hydro.endpoints, scales="free_x", nrow=4)+scale_y_continuous(limits=c(0,1))+
-  geom_vline(xintercept=0, linetype="dashed")+
-  geom_point(aes(y=Condition, x=hydro), colour = 'black', size = 1)
-
-## CSCI
-ggplot(all_data_csci, aes(x=hydro.threshold, y=PredictedProbability, color=threshold))+
-  # geom_point(size=1)+
-  geom_path()+#stat_summary(fun.y="mean", geom="line")+
-  facet_wrap(~hydro.endpoints, scales="free_x", nrow=4)+scale_y_continuous(limits=c(0,1))+
-  geom_vline(xintercept=0, linetype="dashed")+
-  geom_point(aes(y=Condition, x=hydro), colour = 'black', size = 1)
-
+str(bio_h_summary_neg)
