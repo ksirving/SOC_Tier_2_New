@@ -14,6 +14,7 @@
 8 - 08_SOC_alteration.R
 9 - 09_comparison_of_thresholds.R
 10 - 10_Alteration_maps.R
+11 - 11_final_alteration.R
 
 ## code and data descriptions
 
@@ -138,4 +139,6 @@ ASCI_Q99_Alt_over_time.jpg
 # 10_Alteration_maps.R
 
 Alteration maps comparing cthreshold combos spatially. Produces 6 figures, one for each index/fmm
+
+# 11_final_alteration.R
 
