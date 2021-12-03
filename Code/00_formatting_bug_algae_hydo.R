@@ -5,11 +5,11 @@ setwd("/Users/katieirving/Documents/Documents - Katie’s MacBook Pro/git/SOC_Ti
 library(CSCI)
 library(reshape)
 library(reshape2)
-# install.packages("reshape")
 library(ggplot2)
 library(lubridate)
 library(tidyr)
 library(dplyr)
+library(tidyverse)
 
 ## SOC sites
 
@@ -81,6 +81,10 @@ dim(dh_median) # 7236
 
 head(dh_median)
 
+### remove all sites with only one year delta
+
+dh_median <- filter(dh_median, !n_year == 1)
+
 ## subset to only site, flow metric & delta H
 dh_medianx <- dh_median[,c(1,3,8)]
 
@@ -90,10 +94,10 @@ dh_medianx <- dcast(dh_medianx, site~flow_metric) # 443 ( waiting for additional
 ## join with hydro data 
 
 names(dh_medianx)
-unique(dh_medianx$site) ## 529
+unique(dh_medianx$site) ## 529, 522
 
 all_dat_med <- merge(delta_csci, dh_medianx, by.x="stationcode", by.y="site")
-dim(all_dat_med) ## 427
+dim(all_dat_med) ## 427, 420
 
 head(all_dat_med)
 
@@ -184,7 +188,10 @@ delta_asci <- delta_asci[ !duplicated(delta_asci[, c("StationCode")], fromLast=T
 ## subset to median delta   
 dh_median <- subset(dh_data, summary.statistic =="median")
 
+### remove all sites with only one year delta
 
+dh_median <- filter(dh_median, !n_year == 1)
+unique(dh_median$site)
 
 ## subset to only site, flow metric & delta H
 dh_medianx <- dh_median[,c(1,3,8)] ### 
@@ -193,9 +200,9 @@ dh_medianx <- dcast(dh_medianx, site~flow_metric) #
 
 ## merge asci with delta H
 all_dat_med <- merge(delta_asci, dh_medianx, by.x="StationCode", by.y="site")
-dim(all_dat_med) ## 361
+dim(all_dat_med) ## 361, 356
 
 ## save for GLMs
 
 write.csv(all_dat_med, "output_data/00_asci_delta_formatted_median_Nov2021.csv")
-  
+

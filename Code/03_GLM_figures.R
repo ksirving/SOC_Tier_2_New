@@ -52,6 +52,8 @@ all_csci <- left_join(all_csci, labels, by ="hydro.endpoints")
 head(all_csci)
 
 
+
+
 # Figures CSCI-----------------------------------------------------------------
 
 ## filter to only 0.79
@@ -63,6 +65,9 @@ head(all_csci)
 
 ## define FFM to loop through
 HydroEnds <- unique(all_csci$hydro.endpoints)
+
+HydroEnds
+m=2
 
 for(m in 1:length(HydroEnds)) {
   
