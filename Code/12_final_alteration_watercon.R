@@ -1,4 +1,4 @@
-## Biological Flow Alteration - Current Scenario
+## Biological Flow Alteration - Water Conservation (WaterCon) Scenario
 # Level 2 - alteration summary based on various thresholds for CSCI and ASCI
 
 ## Thresholds
@@ -45,8 +45,8 @@ library(rgeos)
 ## Load in data
 # ASCI/CSCI
 
-# Read in CSCI/ASCI suitability data for current scenario
-suit_data <- read.csv("output_data/Manuscript/08_metric_suitability_tally_condensed_all_sites_current.csv")
+# Read in CSCI/ASCI suitability data for WaterCon scenario
+suit_data <- read.csv("output_data/Manuscript/08_metric_suitability_tally_condensed_all_sites_watercons.csv")
 
 # set output directory where maps will be saved
 out.dir <- "output_data/Manuscript/Figures/Maps/"
@@ -106,7 +106,7 @@ suit_data2_50$alteration_50pct_time[suit_data2_50$Altered > 50] <- "Altered"
 suit_data2_50$alteration_50pct_time[suit_data2_50$Altered <= 50] <- "Unaltered"
 
 #write.csv table of altered metrics per subbasin and bio/threshold
-write.csv(suit_data2_50, file = "output_data/11_Level2_altered_metrics_results_50pcttimealtered_0.92csci_prob25_0.94asci_prob50_Current.csv")
+write.csv(suit_data2_50, file = "output_data/12_Level2_altered_metrics_results_50pcttimealtered_0.92csci_prob25_0.94asci_prob50_WaterCon.csv")
 
 ## Set overall alteration for ASCI/CSCI (synthesizing across the 3 important metrics)
 # If >1 metric is altered, then all altered
@@ -127,7 +127,7 @@ subset.50pct.time$overall.altered.2metric[which(subset.50pct.time$alteration_50p
 subset.50pct.time$overall.altered.2metric[which(subset.50pct.time$alteration_50pct_time == "Unaltered" & subset.50pct.time$n > 1)] <- "Unaltered"
 
 # save csv in output_data
-file.name <- "output_data/11_summary.50pct.time.altered.2metrics.Current.csv"
+file.name <- "output_data/12_summary.50pct.time.altered.2metrics.WaterCon.csv"
 write.csv(subset.50pct.time, file=file.name, row.names = FALSE)
 
 
@@ -190,7 +190,6 @@ synthesis.summary.table <- data.frame(synthesis.summary.table)
 ############################################################
 ## Create overall synthesis maps for for 50% of time altered altered, 2 metrics altered
 
-
 # colors and labels for suitability categories - used for legend and maps
 colors <- c("#ca0020", "#fdae61","#0571b0", "white")
 priority <- c("High Priority",  "Medium Priority","Low Priority", NA)
@@ -234,7 +233,7 @@ syn.plot <- study + geom_sf(data = subset.join, color= "lightgrey", aes(fill=syn
 print(syn.plot)
 
 # write plot
-out.filename <- "output_data/Manuscript/Figures/Maps/11_Synthesis_Prioritization_map_LSPC_all_Aliso_Oso_small_creeks_SJ_Current.jpg"
+out.filename <- "output_data/Manuscript/Figures/Maps/12_Synthesis_Prioritization_map_LSPC_all_Aliso_Oso_small_creeks_SJ_WaterCon.jpg"
 ggsave(syn.plot, file = out.filename, dpi=500, height=6, width=8)
 
 
@@ -311,11 +310,10 @@ for(z in indices){
   print(syn.plot)
   
   # write plot
-  out.filename <- paste0("output_data/Manuscript/Figures/Maps/11_", z, "_alteration_map_LSPC_Aliso_Oso_small_creeks_SJ_Current.jpg")
+  out.filename <- paste0("output_data/Manuscript/Figures/Maps/12_", z, "_alteration_map_LSPC_Aliso_Oso_small_creeks_SJ_WaterCon.jpg")
   ggsave(syn.plot, file = out.filename, dpi=300, height=4, width=6)
   
 }
-
 
 # rename Alteration categories - Bio to likely unaltered and likely altered categories
 subset$`Alteration - Biology` <- gsub("Altered", "Likely Altered", subset$`Alteration - Biology`)
@@ -338,6 +336,6 @@ summary.csci.asci.synthesis <- subset2 %>%
   select(c(names(subset2), "synthesis_alteration"))
 
 # write csv summary for CSCI and ASCI
-file.name.summary <- "output_data/11_SOC_CSCI_ASCI_HydroAlt_Synthesis_Summary_Current.csv"
+file.name.summary <- "output_data/12_SOC_CSCI_ASCI_HydroAlt_Synthesis_Summary_WaterCon.csv"
 write.csv(summary.csci.asci.synthesis, file = file.name.summary)
 
