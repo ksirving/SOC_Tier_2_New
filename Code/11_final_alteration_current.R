@@ -9,7 +9,7 @@
 # if >50% of time altered, metric is altered. 
 
 ## Overall prioritization based on CSCI and ASCI alteration:
-# If 2-3 metrics altered (out of 3 important metrics), subbasin considered altered
+# If 2-3 metrics altered (out of 3 important metrics), bio index considered altered
 
 # Author: Kris Taniguchi-Quan, SCCWRP
 
