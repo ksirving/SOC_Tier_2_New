@@ -58,7 +58,7 @@ head(all_csci)
 
 ## filter to only 0.79
 all_csci <- all_csci %>%
-  mutate(Thresholds = as.character(thresholds)) %>%
+  mutate(Thresholds = as.character(thresholds)) #%>%
   filter(thresholds == 0.79) 
 
 head(all_csci)
@@ -94,7 +94,7 @@ for(m in 1:length(HydroEnds)) {
     labs(title = paste(main.title),
          x = "Delta H",
          y = "Probability of Good CSCI") #+ theme_bw(base_size = 15)
-  q3
+  # q3
   out.filename <- paste0(out.dir,"03_csci_", paste(HydroEnds[m]), "_0.79.jpg")
   ggsave(q3, file = out.filename, dpi=300, height=4, width=6)
   
@@ -107,7 +107,7 @@ for(m in 1:length(HydroEnds)) {
 
 ## filter to 0.86
 all_asci <- all_asci %>%
-  mutate(Thresholds = as.character(thresholds)) %>%
+  mutate(Thresholds = as.character(thresholds)) #%>%
   filter(thresholds == 0.86)
 
 ## define FFM to loop through
