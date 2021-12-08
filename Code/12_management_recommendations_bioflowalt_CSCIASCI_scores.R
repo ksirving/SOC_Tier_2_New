@@ -388,3 +388,19 @@ csci.obs.pred.summary <- csci.comparison %>%
   na.omit() %>% 
   mutate(pct.2metric = 100*n/site.length) %>% 
   data.frame()
+
+# subset to only compare ASCI stream characterization
+ASCI.comparison <- dataset.combined %>% 
+  select( Stream.Characterization.ASCI.obs, Stream.Characterization.ASCI.pred) %>% 
+  na.omit()
+
+# tally comparison for contingency table
+site.length <- length(ASCI.comparison$Stream.Characterization.ASCI.obs)
+ASCI.obs.pred.summary <- ASCI.comparison %>% 
+  group_by(Stream.Characterization.ASCI.obs, Stream.Characterization.ASCI.pred) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  na.omit() %>% 
+  mutate(pct.2metric = 100*n/site.length) %>% 
+  data.frame()
+
