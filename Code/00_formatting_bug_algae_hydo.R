@@ -97,7 +97,7 @@ names(dh_medianx)
 unique(dh_medianx$site) ## 529, 522
 
 all_dat_med <- merge(delta_csci, dh_medianx, by.x="stationcode", by.y="site")
-dim(all_dat_med) ## 427, 420
+dim(all_dat_med) ## 420
 
 head(all_dat_med)
 
@@ -171,15 +171,15 @@ asci_sites <- unique(algae4$StationCode)
 delta_sites <- unique(dh_data$site)
 
 delta_sites %in% asci_sites
-sum(delta_sites %in% asci_sites) # 361
+sum(delta_sites %in% asci_sites) # 329
 
 asci_sites %in% delta_sites
-sum(asci_sites %in% delta_sites) # 361
+sum(asci_sites %in% delta_sites) # 329
 
 ### extract only asci sites in delta sites
 
 delta_asci <- subset(algae4, StationCode %in% delta_sites)
-dim(delta_asci) ## 361   5
+dim(delta_asci) ## 329   5
 
 
 ## remobve duplicates
@@ -200,9 +200,29 @@ dh_medianx <- dcast(dh_medianx, site~flow_metric) #
 
 ## merge asci with delta H
 all_dat_med <- merge(delta_asci, dh_medianx, by.x="StationCode", by.y="site")
-dim(all_dat_med) ## 361, 356
+dim(all_dat_med) ## 324, 356
 
 ## save for GLMs
 
 write.csv(all_dat_med, "output_data/00_asci_delta_formatted_median_Nov2021.csv")
 
+## total sites
+
+asci <- read.csv("output_data/00_asci_delta_formatted_median_Nov2021.csv")
+csci <- read.csv("output_data/00_csci_delta_formatted_median_updated_Nov2021.csv")
+names(csci)
+asci <- asci %>%
+  select(StationCode)
+
+csci <- csci %>%
+  select(stationcode)
+
+csci <- csci %>%
+  mutate(StationCode = stationcode) %>%
+  select(StationCode)
+
+all_sites <- rbind(asci, csci)
+
+dim(all_sites) # 744
+ 
+length(unique(all_sites$StationCode)) ## 480

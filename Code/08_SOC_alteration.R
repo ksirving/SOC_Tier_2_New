@@ -23,11 +23,14 @@ thresholds <- thresholds %>%
 thresholdsall <- thresholds %>%
   pivot_wider(names_from = Type, values_from = DeltaH)
 
-## save data - all delta limits for table
+## save data - all delta limits 
 write.csv(thresholdsall, "output_data/Manuscript/08_all_delta_h_limits_all_combinations_thresh_combs.csv")
 
 metrics <- unique(thresholdsall$Hydro_Metric)
 metrics
+
+head(thresholdsall)
+
 
 
 # Upload SOC delta --------------------------------------------------------

@@ -19,7 +19,7 @@ delta_dfx <- delta_dfx %>%
   select(-scenario)
 
 delta_dfx <- na.omit(delta_dfx)
-
+unique(delta_dfx$Biol)
 ## get number and percentage of sites per year altered and combination code
 
 Year_Tally <- delta_dfx %>%
@@ -273,25 +273,19 @@ unique(Tally1x$CombCode)
 
 
 
-# Overall Figure ----------------------------------------------------------
+# summary -----------------------------------------------------------------
 
-## finish this
+## get % alteration overall years and basins
+chosenOnes <- c("0.94_Threshold50", "0.92_Threshold25")
 
- ggplot(data=Year_Tally, aes(x = year, y= Altered, group = CombCode, color = Bio_threshold, linetype = Threshold )) +
-  annotate("rect", ymin = 25, ymax = 75, xmin = 1994, xmax = 2018,
-           alpha = .2) +
-  geom_smooth(method = "loess", se = FALSE ) +
-  facet_wrap(~Biol) +
-  labs(title = "Magnitude of Largest Storm", x = "Year", y = "Altered Subbasins (%)") + 
-  theme(text = element_text(size=10)) +
-  scale_y_continuous(limits = c(0,100)) +
-  scale_colour_discrete(name  ="ASCI Theshold") +
-  scale_linetype_discrete(name  ="Probability Threshold",
-                          breaks=c("Threshold25", "Threshold50", "Threshold75"),
-                          labels=c("0.25", "0.50", "0.75"))
+Tally1 <- Year_Tally %>%
+  filter(CombCode %in% chosenOnes)
 
-asci2
+names(Tally1)
 
-out.filename <- paste0(out.dir,"ASCI_Q99_Alt_over_time.jpg")
-ggsave(asci2, file = out.filename, dpi=300, height=4, width=6)
+Tally1x <- Tally1 %>%
+  group_by(CombCode, Hydro_Metric, Biol) %>%
+  summarise(AlteredMean = mean(Altered), AlteredMedian = median(Altered))
+
+write.csv(Tally1x, "output_data/Manuscript/09_mean_alteration.csv")
 

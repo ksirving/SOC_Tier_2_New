@@ -94,7 +94,7 @@ for(m in 1:length(HydroEnds)) {
     labs(title = paste(main.title),
          x = "Delta H",
          y = "Probability of Good CSCI") #+ theme_bw(base_size = 15)
-  q3
+  # q3
   out.filename <- paste0(out.dir,"03_csci_", paste(HydroEnds[m]), "_0.79.jpg")
   ggsave(q3, file = out.filename, dpi=300, height=4, width=6)
   
@@ -144,4 +144,50 @@ for(m in 1:length(HydroEnds)) {
   
   
 }
+
+
+# Example Figure for report -----------------------------------------------
+
+## filter to only 0.92 - chosen threshold
+all_csci <- all_csci %>%
+  mutate(Thresholds = as.character(thresholds)) %>%
+  filter(thresholds == 0.92) 
+
+head(all_csci)
+
+## define FFM to loop through
+HydroEnds <- unique(all_csci$hydro.endpoints)
+
+HydroEnds
+m=12 ## SP_Tim 
+
+  ## title of FFM
+  main.title <- all_csci %>%
+    ungroup() %>%
+    filter(hydro.endpoints == paste(HydroEnds[m])) %>%
+    select(Flow.Metric.Name) %>%
+    distinct(Flow.Metric.Name)
+  
+  ## subset data and put in order for geom.path
+  all_cscix <- subset(all_csci,hydro.endpoints == paste(HydroEnds[m]))
+  all_cscix <- all_cscix[order(all_cscix$PredictedProbabilityScaled, all_cscix$hydro),]
+  
+  
+  q3 <- ggplot(all_cscix, aes(x=hydro, y=PredictedProbabilityScaled, color=Thresholds))+
+    geom_path()+
+    facet_wrap(~Type, scales = "free_x") +
+    theme(strip.background = element_blank(),
+          strip.text.y = element_blank()) +
+    scale_y_continuous(limits=c(0,1))+
+    theme_minimal()+
+    theme(text = element_text(size=15),axis.text.x = element_text(angle = 60,  vjust = 0.5, hjust=0.5)) +
+    theme(legend.position = "none") +
+    labs(title = paste(main.title),
+         x = "Delta H",
+         y = "Probability of Good CSCI") #+ theme_bw(base_size = 15)
+  q3
+  out.filename <- paste0(out.dir,"03_csci_", paste(HydroEnds[m]), "_0.92.jpg")
+  ggsave(q3, file = out.filename, dpi=300, height=4, width=6)
+  
+  
 

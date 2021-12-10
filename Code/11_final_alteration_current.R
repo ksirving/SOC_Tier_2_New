@@ -58,7 +58,7 @@ basin_comid_lookup <- read.csv("Data/v13_pourpoints_NHD_comids.csv")
 
 # read in lookup table to convert subbasin codes for model output subbasin names
 subbasin_lookup <- read.csv("Data/site_name_lookupletternumbers.csv")
-
+subbasin_lookup
 # read in shapefiles subbasins and reaches
 # subbasin polygon shapefile
 basins <- st_read("Data/Agg_Boundaries_v14.shp", quiet = T)
@@ -340,4 +340,33 @@ summary.csci.asci.synthesis <- subset2 %>%
 # write csv summary for CSCI and ASCI
 file.name.summary <- "output_data/11_SOC_CSCI_ASCI_HydroAlt_Synthesis_Summary_Current.csv"
 write.csv(summary.csci.asci.synthesis, file = file.name.summary)
+
+### tally
+data <- read.csv("output_data/11_SOC_CSCI_ASCI_HydroAlt_Synthesis_Summary_Current.csv")
+
+head(data)
+
+
+
+table(data$hydro.alteration.ASCI)
+# Likely Altered Likely Unaltered 
+# 29               31 
+
+table(data$hydro.alteration.CSCI)
+# Likely Altered Likely Unaltered 
+# 20               40 
+
+table(data$synthesis_alteration)
+
+# High Priority    Low Priority Medium Priority 
+# 16              27              17 
+
+data_med <- data %>%
+  filter(synthesis_alteration == "Medium Priority")
+
+sum(data_med$hydro.alteration.ASCI == "Likely Altered") #13
+
+sum(data_med$hydro.alteration.CSCI == "Likely Altered") #4
+
+
 

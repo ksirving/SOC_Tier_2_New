@@ -54,7 +54,7 @@ Same as above but with ASCI
 
 # 3 - 03_GLM_figures.R
 
-Figures for all FFM and bio indices using 10th percentile threshold (CSCI = 0.79, ASCI = 0.86)
+Figures for all FFM and bio indices with all index thresholds
 These figures are to be used in the FFM filtering process and are avilable in the manuscript supplementary material (Figures xxx)
 
 # 4 - 04_correlation_matrix.R
