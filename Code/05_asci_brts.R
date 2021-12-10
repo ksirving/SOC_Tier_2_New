@@ -186,10 +186,4 @@ ggplot(data=gbm_fin_RI, aes(x=reorder(Flow.Metric.Name,-rel.inf), y=rel.inf, fil
        y = "Relative Importance (%)") #+ theme_bw(base_size = 15)
 
 gbm_fin_RI
-# 
-# Q99 57.9643749 Magnitude of largest annual storm
-# 2          SP_Mag  6.0090830        Spring recession magnitude
-# 3       DS_Dur_WS  5.8642762               Dry-season duration
-# 4          SP_Dur  5.3698195                   Spring duration
-# 5         Wet_Tim  4.2176467                 Wet-season timing
-# 6       DS_Mag_90  3.9689606          Dry-season high baseflow
+

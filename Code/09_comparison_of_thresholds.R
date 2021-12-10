@@ -19,7 +19,7 @@ delta_dfx <- delta_dfx %>%
   select(-scenario)
 
 delta_dfx <- na.omit(delta_dfx)
-
+unique(delta_dfx$Biol)
 ## get number and percentage of sites per year altered and combination code
 
 Year_Tally <- delta_dfx %>%
@@ -273,88 +273,19 @@ unique(Tally1x$CombCode)
 
 
 
-# Overall Figures ----------------------------------------------------------
-library(ggplot2)
-# library(purrr)
-library(dplyr)
-library(tidyverse)
+# summary -----------------------------------------------------------------
 
-out.dir <- "output_data/Manuscript/Figures/"
+## get % alteration overall years and basins
+chosenOnes <- c("0.94_Threshold50", "0.92_Threshold25")
 
-## full names for labels
-labels <- read.csv("Data/ffm_names.csv")
-labels <- labels[1:24, ]
-labels <- labels %>% rename(hydro.endpoints = Flow.Metric.Code)
-labels[25, 1] <- "Magnitude of largest annual storm"
-labels[25, 2] <- "Q99"
-labels[25, 3] <- "Peak Flow"
-labels
+Tally1 <- Year_Tally %>%
+  filter(CombCode %in% chosenOnes)
 
+names(Tally1)
 
+Tally1x <- Tally1 %>%
+  group_by(CombCode, Hydro_Metric, Biol) %>%
+  summarise(AlteredMean = mean(Altered), AlteredMedian = median(Altered))
 
-# data ASCI ---------------------------------------------------------------
-
-## upload data
-all_asci <- read.csv("output_data/01_h_asci_neg_pos_logR_metrics_figures_April2021.csv")
-
-## scale probability
-all_asci <- all_asci %>%
-  select(-X) %>%
-  group_by(comb_code, Type) %>%
-  mutate(PredictedProbabilityScaled = (PredictedProbability-min(PredictedProbability))/
-           (max(PredictedProbability)-min(PredictedProbability))) 
-
-all_asci <- left_join(all_asci, labels, by ="hydro.endpoints")
-
-head(all_asci)
-
-
-# data CSCI ---------------------------------------------------------------
-
-## upload data
-all_csci <- read.csv("output_data/01_CSCI_neg_pos_logR_metrics_figures_April2021.csv")
-
-## scale probability
-all_csci <- all_csci %>%
-  select(-X) %>%
-  group_by(comb_code, Type) %>%
-  mutate(PredictedProbabilityScaled = (PredictedProbability-min(PredictedProbability))/
-           (max(PredictedProbability)-min(PredictedProbability))) 
-
-all_csci <- left_join(all_csci, labels, by ="hydro.endpoints")
-
-head(all_csci)
-
-## final combinations
-
-## Thresholds
-# CSCI - Bio_threshold = 0.92, Threshold = Threshold25
-# ASCI - Bio_threshold = 0.94, Threshold = Threshold50
-
-asci_metrics <- c("Q99", "SP_Dur", "DS_Dur_WS")
-csci_metrics <-c("Q99", "SP_Tim","DS_Dur_WS" )
-
-
-all_csci <- all_csci %>%
-  filter(biol.endpoints %in% c("CSCI"), thresholds == 0.92, hydro.endpoints %in% csci_metrics ) %>%
-  mutate(Thresholds = as.character(thresholds)) 
-
-## subset data and put in order for geom.path
-all_cscix <- all_csci[order(all_csci$PredictedProbabilityScaled, all_csci$hydro),]
-
-head(csci)
-?facet_grid
-q3 <- ggplot(all_cscix, aes(x=hydro, y=PredictedProbabilityScaled))+
-  geom_path()+
-  facet_grid(cols=vars(Type), rows = vars(Flow.Metric.Name), scales = "free_x")+
-  theme(strip.background = element_blank(),
-        strip.text.y = element_blank()) +
-  scale_y_continuous(limits=c(0,1))+
-  theme_minimal()+
-  theme(text = element_text(size=15),axis.text.x = element_text(angle = 60,  vjust = 0.5, hjust=0.5)) +
-  labs( x = "Delta H",
-       y = "Probability of Good CSCI") #+ theme_bw(base_size = 15)
-q3
-out.filename <- paste0(out.dir,"03_csci_", paste(HydroEnds[m]), "_0.79.jpg")
-ggsave(q3, file = out.filename, dpi=300, height=4, width=6)
+write.csv(Tally1x, "output_data/Manuscript/09_mean_alteration.csv")
 
