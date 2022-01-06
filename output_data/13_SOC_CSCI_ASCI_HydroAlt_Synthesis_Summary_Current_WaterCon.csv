@@ -1,0 +1,75 @@
+"X","New_Name","hydro.alteration.ASCI.current","hydro.alteration.CSCI.current","synthesis_alteration.current","hydro.alteration.ASCI.watercon","hydro.alteration.CSCI.watercon","synthesis_alteration.watercon","hydro.alteration.ASCI.change","hydro.alteration.CSCI.change","synthesis_alteration_change","synthesis_alteration_change2"
+1,"I01-010","Likely Unaltered","Likely Unaltered","Low Priority","Likely Altered","Likely Unaltered","Medium Priority","Possible Degradation","No Change","Low Priority to Medium Priority","Possible Degradation"
+2,"I01-011","Likely Altered","Likely Unaltered","Medium Priority","Likely Unaltered","Likely Unaltered","Low Priority","Possible Improvement","No Change","Medium Priority to Low Priority","Possible Improvement"
+3,"I01-012","Likely Altered","Likely Unaltered","Medium Priority","Likely Unaltered","Likely Unaltered","Low Priority","Possible Improvement","No Change","Medium Priority to Low Priority","Possible Improvement"
+4,"I01-020","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+5,"J01-010","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+6,"J01-020","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+7,"J01-030","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+8,"J01-031","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+9,"J01-040","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+10,"J01-041","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+11,"J01-050","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+12,"J01-060","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+13,"J01-061","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+14,"J01-062","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+15,"J01-070","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+16,"J01-080","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+17,"J01-090","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+18,"J01-091","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+19,"J01-100","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+20,"J03-010","Likely Unaltered","Likely Altered","Medium Priority","Likely Altered","Likely Altered","High Priority","Possible Degradation","No Change","Medium Priority to High Priority","Possible Degradation"
+21,"J04-010","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+22,"J05-010","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+23,"J07-010","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+24,"K01-010","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+25,"K01-011","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+26,"K01-020","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+27,"K01-030","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+28,"L01-070","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+29,"L01-080","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+30,"L01-100","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+31,"L01-101","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+32,"L01-110","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+33,"L01-120","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+34,"L01-121","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+35,"L02-010","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+36,"L02-020","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+37,"L02-021","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+38,"L02-022","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+39,"L02-023","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+40,"L02-030","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+41,"L02-031","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+42,"L02-040","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+43,"L02-041","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+44,"L02-050","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+45,"L02-051","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","Possible Improvement","High Priority to Medium Priority","Possible Improvement"
+46,"L02-060","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+47,"L03-010","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+48,"L03-011","Likely Unaltered","Likely Altered","Medium Priority","Likely Altered","Likely Altered","High Priority","Possible Degradation","No Change","Medium Priority to High Priority","Possible Degradation"
+49,"L03-020","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+50,"L03-030","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+51,"L04-010","Likely Altered","Likely Unaltered","Medium Priority","Likely Altered","Likely Unaltered","Medium Priority","No Change","No Change","Medium Priority to Medium Priority","No Change"
+52,"L05-010","Likely Unaltered","Likely Altered","Medium Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","Possible Improvement","Medium Priority to Low Priority","Possible Improvement"
+53,"L05-020","Likely Unaltered","Likely Altered","Medium Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","Possible Improvement","Medium Priority to Low Priority","Possible Improvement"
+54,"M01-010","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+55,"M01-011","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+56,"M01-020","Likely Unaltered","Likely Unaltered","Low Priority","Likely Altered","Likely Unaltered","Medium Priority","Possible Degradation","No Change","Low Priority to Medium Priority","Possible Degradation"
+57,"M02-010","Likely Altered","Likely Altered","High Priority","Likely Altered","Likely Altered","High Priority","No Change","No Change","High Priority to High Priority","No Change"
+58,"M02-011","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Altered","Medium Priority","No Change","Possible Degradation","Low Priority to Medium Priority","Possible Degradation"
+59,"M02-020","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+60,"M02-030","Likely Unaltered","Likely Unaltered","Low Priority","Likely Unaltered","Likely Unaltered","Low Priority","No Change","No Change","Low Priority to Low Priority","No Change"
+NA,"999997",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"L01-050",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"L01-040",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"L01-060",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"L01-090",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"L01-020",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"L01-030",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"L01-010",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"999996",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"999995",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"999994",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"999993",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"999992",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,"999991",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
