@@ -1,5 +1,9 @@
 # SOC_Tier_2_New
 
+please cite: 
+
+Irving, K., Taniguchi-Quan, K. T. R., Aprahamian, A., Rivers, C., Sharp, G., Mazor, R.D., Theroux, S., Holt, A., Peek, R., Stein, E. D. (2022). Application of flow ecology analysis to inform prioritization for stream restoration and management actions. Frontiers in Environmental Science - Freshwater Science.
+
 ## Code index
 
 1 - 00_formatting_bug_algae_hydo.R
@@ -15,6 +19,8 @@
 9 - 09_comparison_of_thresholds.R
 10 - 10_Alteration_maps.R
 11 - 11_final_alteration.R
+12- 12_management_recommendations_bioflowalt_CSCIASCI_scores.R
+13 - 13_final_alteration_watercon.R
 
 ## code and data descriptions
 
@@ -138,7 +144,11 @@ ASCI_Q99_Alt_over_time.jpg
 
 # 10_Alteration_maps.R
 
-Alteration maps comparing cthreshold combos spatially. Produces 6 figures, one for each index/fmm
+Alteration maps comparing threshold combos spatially. Produces 6 figures, one for each index/fmm
 
 # 11_final_alteration.R
+
+plots biological alteration with the final combinations for ASCI, ASCI and synthesis
+
+11_SOC_CSCI_ASCI_HydroAlt_Synthesis_Summary_Current.csv
 
